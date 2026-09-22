@@ -1,0 +1,42 @@
+name: Parallel Jobs
+
+on:
+  push:
+   branches:
+     - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Building application"
+      - run: sleep 10
+
+
+  unit-test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Running unit tests"
+      - run: sleep 20
+
+
+  security-scan:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Running security scan"
+      - run: sleep 15
+
+
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Running lint"
+      - run: sleep 5
